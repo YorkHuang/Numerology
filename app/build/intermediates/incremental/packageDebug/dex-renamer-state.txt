@@ -1,4 +1,4 @@
-#Tue Oct 04 18:06:48 CST 2016
+#Fri Oct 07 17:29:06 CST 2016
 base.0=C\:\\Users\\user\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_e65076d8ffa8cd319c60793d281d1fca148890c0
 renamed.1=classes2.dex
 renamed.0=classes.dex

@@ -2,6 +2,9 @@ package com.york.user.numerology;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
+import android.icu.util.Calendar;
+import android.icu.util.GregorianCalendar;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,12 +20,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private int mYear, mMonth, mDay;
+    private int mYear, mMonth, mDay, mHour, mMimute;
     private DatePickerDialog datePickerDialog;
+    private TimePickerDialog timePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,19 +100,39 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month,
-                                  int day) {
-                mYear = year;
-                mMonth = month;
-                mDay = day;
-                //dateText.setText("你設定的日期為"+setDateFormat(year,month,day));
-            }
 
-        }, mYear,mMonth, mDay);
+        GregorianCalendar calendar = new GregorianCalendar();
 
-        return datePickerDialog;
+        switch(id) {
+            case 0:
+                datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month,
+                                          int day) {
+                        mYear = year;
+                        mMonth = month;
+                        mDay = day;
+                        //dateText.setText("你設定的日期為"+setDateFormat(year,month,day));
+                    }
+
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.YEAR), calendar.get(Calendar.YEAR));
+
+                return datePickerDialog;
+
+            break;
+
+            case 1:
+
+                timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+
+                    }
+                });
+                return timePickerDialog;
+
+                break;
+        }
     }
 
     private String setDateFormat(int year,int monthOfYear,int dayOfMonth){
@@ -122,13 +147,17 @@ public class MainActivity extends AppCompatActivity
         String title = getString(R.string.app_name);
 
         switch (viewId) {
-            case R.id.nav_gallery:
+            case R.id.nav_profile:
                 fragment = new BazuFragment();
                 title = "Bzau";
                 break;
-            case R.id.nav_manage:
+            case R.id.nav_date:
                 showDialog(0);
                 datePickerDialog.updateDate(mYear, mMonth, mDay);
+                break;
+            case R.id.nav_time:
+                showDialog(0);
+                timePickerDialog.updateTime(mHour, mMimute);
                 break;
         }
 

@@ -128,6 +128,10 @@
         "source": "C:\\Users\\user\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_menu.xml"
     },
     {
+        "merged": "C:\\Users\\user\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_profile.xml",
+        "source": "C:\\Users\\user\\AndroidStudioProjects\\Numerology\\app\\src\\main\\res\\layout\\fragment_profile.xml"
+    },
+    {
         "merged": "C:\\Users\\user\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
         "source": "C:\\Users\\user\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_part_time.xml"
     },
