@@ -2734,7 +2734,7 @@ containing a value of this type.
         public static final int text2=0x7f0c0087;
         public static final int textSpacerNoButtons=0x7f0c0050;
         public static final int textView=0x7f0c007e;
-        public static final int textView2=0x7f0c007c;
+        public static final int textView_lunardate=0x7f0c007c;
         public static final int text_input_password_toggle=0x7f0c007b;
         public static final int time=0x7f0c0085;
         public static final int title=0x7f0c0046;
