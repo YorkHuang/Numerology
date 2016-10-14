@@ -3,8 +3,6 @@ package com.york.user.numerology;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.icu.util.Calendar;
-import android.icu.util.GregorianCalendar;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,11 +19,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private int mYear, mMonth, mDay, mHour, mMimute;
+    private int mYear, mMonth, mDay;
+    private int mHour = 0 , mMimute = 0;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
 
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        displayView(R.id.nav_stock);
     }
 
     @Override
@@ -67,19 +70,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         displayView(id);
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity
         GregorianCalendar calendar = new GregorianCalendar();
 
         switch(id) {
-            case 0:
+            case Config.FRAGMENT_DATE:
                 datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month,
@@ -119,20 +118,19 @@ public class MainActivity extends AppCompatActivity
 
                 return datePickerDialog;
 
-            break;
+            case Config.FRAGMENT_TIME:
 
-            case 1:
-
-                timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener(){
                     @Override
-                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
-
+                    public void onTimeSet(TimePicker timePicker, int hourOfDate, int minute) {
+                        mHour = hourOfDate;
+                        mMimute = minute;
                     }
-                });
+                },calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),false);
                 return timePickerDialog;
 
-                break;
         }
+        return null;
     }
 
     private String setDateFormat(int year,int monthOfYear,int dayOfMonth){
@@ -148,16 +146,20 @@ public class MainActivity extends AppCompatActivity
 
         switch (viewId) {
             case R.id.nav_profile:
-                fragment = new BazuFragment();
+                fragment = BazuFragment.newInstance(mYear, mMonth, mDay, mHour);
                 title = "Bzau";
                 break;
             case R.id.nav_date:
-                showDialog(0);
+                showDialog(Config.FRAGMENT_DATE);
                 datePickerDialog.updateDate(mYear, mMonth, mDay);
                 break;
             case R.id.nav_time:
-                showDialog(0);
+                showDialog(Config.FRAGMENT_TIME);
                 timePickerDialog.updateTime(mHour, mMimute);
+                break;
+            case R.id.nav_stock:
+                fragment = StockFragment.newInstance();
+                title = "Stock";
                 break;
         }
 
