@@ -306,6 +306,7 @@ public class Lunar {
     private int solarYear;
     private int solarMonth;
     private int solarDay;
+    private int hour;
     private int cyclicalYear = 0;
     private int cyclicalMonth = 0;
     private int cyclicalDay = 0;
@@ -390,12 +391,13 @@ public class Lunar {
 
     /**
      * 取干支曆 不是歷年，曆月干支，而是中國的從立春節氣開始的節月，是中國的太陽十二宮，陽曆的。
-     * @param cncaData 日曆對象(Tcnca)
+     * @param
      */
     private void getCyclicalData() {
         this.solarYear = this.solar.get(Calendar.YEAR);
         this.solarMonth = this.solar.get(Calendar.MONTH);
         this.solarDay = this.solar.get(Calendar.DAY_OF_MONTH);
+        this.hour = this.solar.get(Calendar.HOUR_OF_DAY);
         // 干支曆    
         int cyclicalYear = 0;
         int cyclicalMonth = 0;
@@ -507,6 +509,14 @@ public class Lunar {
      */
     public int getDeqiD() {
         return Lunar.getDeqi(this.cyclicalDay);
+    }
+
+    /**
+     * 時間地支
+     * @return
+     */
+    public int getDeqiH() {
+        return Lunar.getHourDeqi(this.hour);
     }
 
     /**
@@ -660,7 +670,7 @@ public class Lunar {
      * @return 是否黑色星期五
      */
     public boolean isBlackFriday() {
-        return (this.getSolarDay() == 13 && this.solar.get(Calendar.DAY_OF_WEEK)==6);
+        return (this.getSolarDay() == 13 && this.solar.get(Calendar.DAY_OF_WEEK) == 6);
     }
 
     /**
@@ -761,6 +771,16 @@ public class Lunar {
          return cyclicalNumber % 10;
     }
 
+    private static int getHourDeqi(int hour) {
+        int h = 0;
+        if (hour == 0 || hour == 23) {
+            h = 0;
+        } else {
+            h = (int) ((hour + 1) / 2);
+        }
+        return h;
+    }
+
     /**
      * 返回指定數位的農曆年份表示字串
      * @param lunarYear 農曆年份(數字,0為甲子)
@@ -820,7 +840,8 @@ public class Lunar {
         bazi[4] = Deqi[getDeqiY()];
         bazi[5] = Deqi[getDeqiM()];
         bazi[6] = Deqi[getDeqiD()];
-        bazi[7] = Deqi[getDeqiD()];
+        bazi[7] = Deqi[getDeqiH()];
+        bazi[3] = Tianan[getTiananH(getTiananD(), getDeqiH())];
         return bazi;
     }
 
@@ -833,7 +854,30 @@ public class Lunar {
         bazi[4] = getDeqiY();
         bazi[5] = getDeqiM();
         bazi[6] = getDeqiD();
-        bazi[7] = getDeqiD();
+        bazi[7] = getDeqiH();
+        bazi[3] = getTiananH(getTiananD(), getDeqiH());
         return bazi;
+    }
+
+    /**
+     * 計算時天干
+     * @param D 時地支
+     * @param T 日天干
+     * @return
+     */
+    private int getTiananH(int D, int T) {
+        int A = 0, B = 0, C = 0;
+
+        A = D;
+        if (T < 5) {
+            B = T * 2;
+        } else {
+            B = T * 2 - 10;
+        }
+
+        C = A + B;
+        C = C % 10;
+
+        return C;
     }
 }  
