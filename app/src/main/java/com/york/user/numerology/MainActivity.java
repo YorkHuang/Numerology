@@ -3,6 +3,8 @@ package com.york.user.numerology;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity
         switch (viewId) {
             case R.id.nav_profile:
                 fragment = BazuFragment.newInstance(mYear, mMonth, mDay, mHour);
-                title = "Bzau";
+                title = "Bazu";
                 break;
             case R.id.nav_date:
                 showDialog(Config.FRAGMENT_DATE);

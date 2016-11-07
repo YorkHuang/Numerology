@@ -10,6 +10,9 @@ import android.widget.TextView;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import static com.york.user.numerology.Lunar.Deqi;
+import static com.york.user.numerology.Lunar.Tianan;
+
 
 public class StockFragment extends Fragment {
 
@@ -47,16 +50,45 @@ public class StockFragment extends Fragment {
         super.onDetach();
     }
 
-
     private void getToadyLunarString() {
 
         Date today = new Date(System.currentTimeMillis());
-        Lunar lu = new Lunar(today);
-        int a = lu.getTiananD();
-        int b = lu.getTiananM();
-        int c = lu.getTiananY();
-        int d = lu.getDeqiD();
-        int e = lu.getDeqiM();
-        int f = lu.getDeqiY();
+        Lunar lunar = new Lunar(today);
+        String[] tdBazi = lunar.getBaZiString();
+        int[] def = lunar.getBaZiInt();
+
+        tv_lunar_date.setText(tdBazi[0] + " " + tdBazi[1] + " " + tdBazi[2] + " " + tdBazi[3] + " "
+                + tdBazi[4] + " " + tdBazi[5] + " " + tdBazi[6] + " " + tdBazi[7]);
+    }
+
+    // Time of TanGan
+    private int Month_Time_TanGan_cal(int D, int T) {
+        int A = 0, B = 0, C = 0;
+//        for (int i = 0; i < Deqi.length; i++) {
+//            if (Deqi[i].equals(sbuf1[D])) {
+//                A = i;
+//            }
+//        }
+//        for (int i = 0; i < 10; i++) {
+//            if (Tianan[i].equals(sbuf1[T])) {
+//                if (i < 5) {
+//                    B = i * 2;
+//                } else {
+//                    B = i * 2 - 10;
+//                }
+//            }
+//        }
+
+        A = D;
+        if (T < 5) {
+            B = T * 2;
+        } else {
+            B = T * 2 - 10;
+        }
+
+        C = A + B;
+        C = C % 10;
+
+        return C;
     }
 }

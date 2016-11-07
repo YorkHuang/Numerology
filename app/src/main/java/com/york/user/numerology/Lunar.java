@@ -810,4 +810,30 @@ public class Lunar {
     	int i = Lunar.getSolarTermDay(solarYear, solarMonth * 2);
     	return i ;
     }
+
+    public String[] getBaZiString() {
+        String[] bazi = new String[]{"年天","月天","日天","時天","年地","月地","日地","時地"};
+
+        bazi[0] = Tianan[getTiananY()];
+        bazi[1] = Tianan[getTiananM()];
+        bazi[2] = Tianan[getTiananD()];
+        bazi[4] = Deqi[getDeqiY()];
+        bazi[5] = Deqi[getDeqiM()];
+        bazi[6] = Deqi[getDeqiD()];
+        bazi[7] = Deqi[getDeqiD()];
+        return bazi;
+    }
+
+    public int[] getBaZiInt() {
+        int[] bazi = new int[8];
+
+        bazi[0] = getTiananY();
+        bazi[1] = getTiananM();
+        bazi[2] = getTiananD();
+        bazi[4] = getDeqiY();
+        bazi[5] = getDeqiM();
+        bazi[6] = getDeqiD();
+        bazi[7] = getDeqiD();
+        return bazi;
+    }
 }  
