@@ -5,18 +5,28 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.EntryXComparator;
+import com.york.user.numerology.YorkLifeCode.Lunar;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
-
-import static com.york.user.numerology.Lunar.Deqi;
-import static com.york.user.numerology.Lunar.Tianan;
 
 
-public class StockFragment extends Fragment {
+public class StockFragment extends Fragment implements OnChartValueSelectedListener{
 
-    private TextView tv_lunar_date;
+
+    private LineChart mChart;
 
     public StockFragment() {
         // Required empty public constructor
@@ -38,9 +48,31 @@ public class StockFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_stock, container, false);
 
-        tv_lunar_date = (TextView) view.findViewById(R.id.textView_lunardate);
+        mChart = (LineChart) view.findViewById(R.id.chart1);
+        mChart.setOnChartValueSelectedListener(this);
+        mChart.setDrawGridBackground(false);
+        mChart.getDescription().setEnabled(false);
+        mChart.setTouchEnabled(true);
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(true);
+        mChart.setPinchZoom(true);
 
-        getToadyLunarString();
+        XAxis x1 = mChart.getXAxis();
+        x1.setAvoidFirstLastClipping(true);
+        x1.setAxisMaximum(0f);
+
+        YAxis leftAxis = mChart.getAxisLeft();
+        leftAxis.setInverted(true);
+        leftAxis.setAxisMinimum(0f);
+
+        YAxis rightAxis = mChart.getAxisRight();
+        rightAxis.setEnabled(false);
+
+        setData(25, 50);
+
+        Legend l = mChart.getLegend();
+        l.setForm(Legend.LegendForm.LINE);
+        mChart.invalidate();
 
         return view;
     }
@@ -50,16 +82,49 @@ public class StockFragment extends Fragment {
         super.onDetach();
     }
 
+    @Override
+    public void onValueSelected(Entry e, Highlight h) {
+
+    }
+
+    @Override
+    public void onNothingSelected() {
+
+    }
+
+
+
     private void getToadyLunarString() {
 
         Date today = new Date(System.currentTimeMillis());
         Lunar lunar = new Lunar(today);
         String[] tdBazi = lunar.getBaZiString();
         int[] def = lunar.getBaZiInt();
-
-        tv_lunar_date.setText(tdBazi[3] + " " + tdBazi[2] + " " + tdBazi[1] + " " + tdBazi[0] + "\n"
-                + tdBazi[7] + " " + tdBazi[6] + " " + tdBazi[5] + " " + tdBazi[4]);
     }
 
+    private void setData(int count, float range) {
 
+        ArrayList<Entry> entries = new ArrayList<Entry>();
+
+        for (int i = 0; i < count; i++) {
+            float xVal = (float) (Math.random() * range);
+            float yVal = (float) (Math.random() * range);
+            entries.add(new Entry(xVal, yVal));
+        }
+
+        // sort by x-value
+        Collections.sort(entries, new EntryXComparator());
+
+        // create a dataset and give it a type
+        LineDataSet set1 = new LineDataSet(entries, "DataSet 1");
+
+        set1.setLineWidth(1.5f);
+        set1.setCircleRadius(4f);
+
+        // create a data object with the datasets
+        LineData data = new LineData(set1);
+
+        // set data
+        mChart.setData(data);
+    }
 }

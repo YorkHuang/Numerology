@@ -2631,7 +2631,7 @@ containing a value of this type.
         public static final int center=0x7f0c0023;
         public static final int center_horizontal=0x7f0c0024;
         public static final int center_vertical=0x7f0c0025;
-        public static final int chart_line=0x7f0c007d;
+        public static final int chart1=0x7f0c007c;
         public static final int checkbox=0x7f0c0055;
         public static final int chronometer=0x7f0c0087;
         public static final int clip_horizontal=0x7f0c002e;
@@ -2713,6 +2713,7 @@ containing a value of this type.
         public static final int search_plate=0x7f0c0066;
         public static final int search_src_text=0x7f0c0067;
         public static final int search_voice_btn=0x7f0c006b;
+        public static final int seekBar1=0x7f0c007d;
         public static final int select_dialog_listview=0x7f0c006c;
         public static final int shortcut=0x7f0c0056;
         public static final int showCustom=0x7f0c0011;
@@ -2735,7 +2736,6 @@ containing a value of this type.
         public static final int text2=0x7f0c0088;
         public static final int textSpacerNoButtons=0x7f0c0050;
         public static final int textView=0x7f0c007f;
-        public static final int textView_lunardate=0x7f0c007c;
         public static final int text_input_password_toggle=0x7f0c007b;
         public static final int time=0x7f0c0086;
         public static final int title=0x7f0c0046;

@@ -140,12 +140,12 @@
         "source": "C:\\Users\\GRT-EK\\Desktop\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable\\abc_textfield_search_material.xml"
     },
     {
-        "merged": "C:\\Users\\GRT-EK\\Desktop\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
-        "source": "C:\\Users\\GRT-EK\\Desktop\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable\\abc_seekbar_thumb_material.xml"
-    },
-    {
         "merged": "C:\\Users\\GRT-EK\\Desktop\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_manage.xml",
         "source": "C:\\Users\\GRT-EK\\Desktop\\AndroidStudioProjects\\Numerology\\app\\src\\main\\res\\drawable\\ic_menu_manage.xml"
+    },
+    {
+        "merged": "C:\\Users\\GRT-EK\\Desktop\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
+        "source": "C:\\Users\\GRT-EK\\Desktop\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable\\abc_seekbar_thumb_material.xml"
     },
     {
         "merged": "C:\\Users\\GRT-EK\\Desktop\\AndroidStudioProjects\\Numerology\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",

@@ -674,7 +674,7 @@ int id cancel_action 0x7f0c0081
 int id center 0x7f0c0023
 int id center_horizontal 0x7f0c0024
 int id center_vertical 0x7f0c0025
-int id chart_line 0x7f0c007d
+int id chart1 0x7f0c007c
 int id checkbox 0x7f0c0055
 int id chronometer 0x7f0c0087
 int id clip_horizontal 0x7f0c002e
@@ -756,6 +756,7 @@ int id search_mag_icon 0x7f0c0065
 int id search_plate 0x7f0c0066
 int id search_src_text 0x7f0c0067
 int id search_voice_btn 0x7f0c006b
+int id seekBar1 0x7f0c007d
 int id select_dialog_listview 0x7f0c006c
 int id shortcut 0x7f0c0056
 int id showCustom 0x7f0c0011
@@ -778,7 +779,6 @@ int id text 0x7f0c008a
 int id text2 0x7f0c0088
 int id textSpacerNoButtons 0x7f0c0050
 int id textView 0x7f0c007f
-int id textView_lunardate 0x7f0c007c
 int id text_input_password_toggle 0x7f0c007b
 int id time 0x7f0c0086
 int id title 0x7f0c0046
