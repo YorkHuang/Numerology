@@ -16,6 +16,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.EntryXComparator;
+import com.york.user.numerology.YorkLifeCode.Bazi;
 import com.york.user.numerology.YorkLifeCode.Lunar;
 
 import java.util.ArrayList;
@@ -74,6 +75,8 @@ public class StockFragment extends Fragment implements OnChartValueSelectedListe
         l.setForm(Legend.LegendForm.LINE);
         mChart.invalidate();
 
+        getToadyLunarString();
+
         return view;
     }
 
@@ -99,7 +102,8 @@ public class StockFragment extends Fragment implements OnChartValueSelectedListe
         Date today = new Date(System.currentTimeMillis());
         Lunar lunar = new Lunar(today);
         String[] tdBazi = lunar.getBaZiString();
-        int[] def = lunar.getBaZiInt();
+        int[] iBazi = lunar.getBaZiInt();
+
     }
 
     private void setData(int count, float range) {
