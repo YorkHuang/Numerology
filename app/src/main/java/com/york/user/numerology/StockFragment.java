@@ -103,7 +103,8 @@ public class StockFragment extends Fragment implements OnChartValueSelectedListe
         Lunar lunar = new Lunar(today);
         String[] tdBazi = lunar.getBaZiString();
         int[] iBazi = lunar.getBaZiInt();
-
+        Bazi bz = new Bazi(iBazi);
+        int[] wuSinPrc =  bz.getWuSinPercentage();
     }
 
     private void setData(int count, float range) {

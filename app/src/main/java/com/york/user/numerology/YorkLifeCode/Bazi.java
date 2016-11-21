@@ -32,27 +32,33 @@ public class Bazi {
     }
 
     /**
-     * 取得五行的百分比
+     * *35  35  35  35
+     * 100 100 200 100
+     *
+     * @return 取得五行的百分比
      */
-    public void getWuSinPercentage() {
+    public int[] getWuSinPercentage() {
 
-        // 木=0 ,火=1 ,土=2 ,金=3 ,水=4
-        double[] iWuSin = new double[] { 0, 0, 0, 0, 0 };
-        int[] WuSin_TanGan = new int[] { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4 };
+        int[] wuSinPerc = new int[] { 0, 0, 0, 0, 0 };//{木,火,土,金,水}總百分比
+        int[] WuSin_TanGan = new int[] { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4 };//木=0 ,火=1 ,土=2 ,金=3 ,水=4
 
         for (int i=0 ; i<4 ; i++) {
-            iWuSin[WuSin_TanGan[mLifeCode[i]]]++;
+            wuSinPerc[WuSin_TanGan[mLifeCode[i]]] += 35;
         }
 
         for (int i=4 ; i<8 ; i++) {
             int[] element = getElement(this.mLifeCode[i]);
+            int baseValue = 0;
+            if (i == 6) {
+                baseValue = (int) (200 / element.length);
+            } else {
+                baseValue = (int) (100 / element.length);
+            }
             for (int j=0; j<element.length; j++) {
-                iWuSin[WuSin_TanGan[element[j]]]++;
+                wuSinPerc[WuSin_TanGan[element[j]]] += baseValue;
             }
         }
-
-        35  35  35  35
-        100 100 200 100
+        return wuSinPerc;
 
     }
 
