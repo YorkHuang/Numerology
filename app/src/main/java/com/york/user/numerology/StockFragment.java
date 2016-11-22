@@ -62,8 +62,34 @@ public class StockFragment extends Fragment implements OnChartValueSelectedListe
         dataSet.setColor(R.color.colorPrimary);
 
         LineData lineData = new LineData(dataSet);
+        mChart.setDragEnabled(true);
         mChart.setData(lineData);
         mChart.invalidate();
+
+//        mChart.setOnChartValueSelectedListener(this);
+//        mChart.setDrawGridBackground(false);
+//        mChart.getDescription().setEnabled(false);
+//        mChart.setTouchEnabled(true);
+//        mChart.setDragEnabled(true);
+//        mChart.setScaleEnabled(true);
+//        mChart.setPinchZoom(true);
+//
+//        XAxis x1 = mChart.getXAxis();
+//        x1.setAvoidFirstLastClipping(true);
+//        x1.setAxisMaximum(0f);
+//
+//        YAxis leftAxis = mChart.getAxisLeft();
+//        leftAxis.setInverted(true);
+//        leftAxis.setAxisMinimum(0f);
+//
+//        YAxis rightAxis = mChart.getAxisRight();
+//        rightAxis.setEnabled(false);
+//
+//        setData(25, 50);
+//
+//        Legend l = mChart.getLegend();
+//        l.setForm(Legend.LegendForm.LINE);
+//        mChart.invalidate();
 
         getToadyLunarString();
 
