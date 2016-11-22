@@ -20,11 +20,13 @@ import com.york.user.numerology.YorkLifeCode.Bazi;
 import com.york.user.numerology.YorkLifeCode.Lunar;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 
-public class StockFragment extends Fragment implements OnChartValueSelectedListener{
+public class StockFragment extends Fragment implements OnChartValueSelectedListener {
 
 
     private LineChart mChart;
@@ -50,29 +52,17 @@ public class StockFragment extends Fragment implements OnChartValueSelectedListe
         View view = inflater.inflate(R.layout.fragment_stock, container, false);
 
         mChart = (LineChart) view.findViewById(R.id.chart1);
-        mChart.setOnChartValueSelectedListener(this);
-        mChart.setDrawGridBackground(false);
-        mChart.getDescription().setEnabled(false);
-        mChart.setTouchEnabled(true);
-        mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(true);
-        mChart.setPinchZoom(true);
+        List<Integer> dataObjs = getToadyLunarString();
+        List<Entry> entries = new ArrayList<Entry>();
+        for (int i = 0; i < dataObjs.size(); i++) {
+            entries.add(new Entry(i, dataObjs.get(i)));
+        }
 
-        XAxis x1 = mChart.getXAxis();
-        x1.setAvoidFirstLastClipping(true);
-        x1.setAxisMaximum(0f);
+        LineDataSet dataSet = new LineDataSet(entries, "Label");
+        dataSet.setColor(R.color.colorPrimary);
 
-        YAxis leftAxis = mChart.getAxisLeft();
-        leftAxis.setInverted(true);
-        leftAxis.setAxisMinimum(0f);
-
-        YAxis rightAxis = mChart.getAxisRight();
-        rightAxis.setEnabled(false);
-
-        setData(25, 50);
-
-        Legend l = mChart.getLegend();
-        l.setForm(Legend.LegendForm.LINE);
+        LineData lineData = new LineData(dataSet);
+        mChart.setData(lineData);
         mChart.invalidate();
 
         getToadyLunarString();
@@ -95,41 +85,21 @@ public class StockFragment extends Fragment implements OnChartValueSelectedListe
 
     }
 
+    private List<Integer> getToadyLunarString() {
 
+        List<Integer> dataObjs = new ArrayList<Integer>();
 
-    private void getToadyLunarString() {
-
-        Date today = new Date(System.currentTimeMillis());
-        Lunar lunar = new Lunar(today);
-        String[] tdBazi = lunar.getBaZiString();
-        int[] iBazi = lunar.getBaZiInt();
-        Bazi bz = new Bazi(iBazi);
-        int[] wuSinPrc =  bz.getWuSinPercentage();
-    }
-
-    private void setData(int count, float range) {
-
-        ArrayList<Entry> entries = new ArrayList<Entry>();
-
-        for (int i = 0; i < count; i++) {
-            float xVal = (float) (Math.random() * range);
-            float yVal = (float) (Math.random() * range);
-            entries.add(new Entry(xVal, yVal));
+        for (int i = 0 ; i < 100 ; i++) {
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE , i);
+            Date day = cal.getTime();
+            Lunar lunar = new Lunar(day);
+            int[] iBazi = lunar.getBaZiInt();
+            Bazi bz = new Bazi(iBazi);
+            int[] wuSinPrc = bz.getWuSinPercentage();
+            dataObjs.add(wuSinPrc[4]);
         }
 
-        // sort by x-value
-        Collections.sort(entries, new EntryXComparator());
-
-        // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(entries, "DataSet 1");
-
-        set1.setLineWidth(1.5f);
-        set1.setCircleRadius(4f);
-
-        // create a data object with the datasets
-        LineData data = new LineData(set1);
-
-        // set data
-        mChart.setData(data);
+        return dataObjs;
     }
 }
